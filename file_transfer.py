@@ -10,7 +10,8 @@ def save_file(file):
         with open(file_path, "rb") as source:
             bytes_copied = 0
             while True:
-                chunk = source.read(8192)  # Read in 8KB chunks
+                # chunk = source.read(8192)  # Read in 8KB chunks
+                chunk = source.read(8192000)  # Read in 8MB chunks
                 if not chunk:
                     break
                 dest.write(chunk)
@@ -26,4 +27,4 @@ with gr.Blocks() as demo:
     save_button = gr.Button("Save File")
     save_button.click(save_file, inputs=file_input, outputs=status)
 
-demo.launch()
+demo.launch(share=True)
